@@ -9,6 +9,12 @@ const query = `*[_type == "blog"] {
   "imageUrl": image.asset->url
 }`;
 
+interface BlogPost {
+    _id :string;
+    title :string ;
+    imageUrl : string;
+}
+
 // Fetch data from Sanity
 const fetchData = async () => {
   const posts = await client.fetch(query);
@@ -24,7 +30,7 @@ export default async function Home() {
       <div className="text-gray-600 body-font">
         <div className="container px-5 py-12 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post: any) => (
+            {posts.map((post: BlogPost) => (
               <div
                 key={post._id}
                 className="p-6 bg-white shadow-lg rounded-lg"

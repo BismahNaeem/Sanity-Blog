@@ -19,7 +19,7 @@ const Home = () => {
         The AI Revolution: Transforming Our World
         </h1>
         <p className="mb-8  leading-relaxed">
-        We're living in an era where artificial intelligence is no longer just a concept, but a reality that's reshaping our world. This blog explores the exciting developments, innovations, and advancements in AI and their far-reaching implications for humanity.
+        We are living in an era where artificial intelligence is no longer just a concept, but a reality thats reshaping our world. This blog explores the exciting developments, innovations, and advancements in AI and their far-reaching implications for humanity.
         </p>
         <div className="flex justify-center">
         <Link href="/blogpage">
