@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// GROQ query to fetch blog data
 const query = `*[_type == "blog" && _id == $id][0] {
   _id,
   title,
@@ -21,19 +20,19 @@ interface BlogPost {
   publishedAt: string;
 }
 
-// Function to fetch post by id
-const fetchPostById = async (id: string) => {
-  const post = await client.fetch(query, { id });
-  return post;
-};
-
-// Type for the BlogDetail component props
+// Fixing type for BlogDetailProps to match Next.js's expected type for dynamic routes
 interface BlogDetailProps {
   params: {
     id: string;
   };
 }
 
+const fetchPostById = async (id: string) => {
+  const post = await client.fetch(query, { id });
+  return post;
+};
+
+// Make sure BlogDetail receives the correct props type
 export default async function BlogDetail({ params }: BlogDetailProps) {
   const { id } = params;
   const post: BlogPost = await fetchPostById(id);
@@ -46,12 +45,7 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
     <>
       <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-center">
         <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl w-full animate-slide-in">
-          <div className='mb-10'>
-            <Link href="/">
-              <button className='font-bold text-md bg-gray-100 rounded-md'>Back to blogs</button>
-            </Link>
-          </div>
-
+          <div className='mb-10'> <Link href="/"><button className='font-bold text-md bg-gray-100 rounded-md'> Back to blogs</button></Link ></div>
           {/* Blog Title */}
           <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">{post.title}</h1>
 
