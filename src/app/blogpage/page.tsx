@@ -16,7 +16,7 @@ interface BlogPost {
 }
 
 // Fetch data from Sanity
-const fetchData = async () => {
+const fetchData = async (): Promise<BlogPost[]> => { // Specify the return type
   const posts = await client.fetch(query);
   return posts;
 };

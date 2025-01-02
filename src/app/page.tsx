@@ -16,11 +16,11 @@ const Home = () => {
       />
       <div className="text-center lg:w-2/3 w-full">
         <h1 className="title-font font-bold sm:text-4xl text-3xl mb-4  text-gray-900">
-        The AI Revolution: Transforming Our World
+        &quot;The AI Revolution: Transforming Our World&quot;
         </h1>
         <p className="mb-8  leading-relaxed">
-        We are living in an era where artificial intelligence is no longer just a concept but a reality thats reshaping our world. This blog explores the exciting developments innovations and advancements in AI and their far-reaching implications for humanity.
-        </p>
+        
+        </p>We are living in an era where artificial intelligence is no longer just a concept but a reality that&#39;s reshaping our world. This blog explores the exciting developments, innovations, and advancements in AI and their far-reaching implications for humanity.
         <div className="flex justify-center">
         <Link href="/blogpage">
         <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
