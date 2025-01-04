@@ -1,3 +1,6 @@
+import { kMaxLength } from "buffer";
+import { title } from "process";
+
 export const Blog = {
     title: "blog",
     name: "blog",
@@ -21,6 +24,7 @@ export const Blog = {
         name: "image",
         type: "image",
        } ,
+     
     
     ] 
 
