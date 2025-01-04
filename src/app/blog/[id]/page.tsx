@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import CommentSection from '@/app/components/comments';
 import { client } from '@/sanity/lib/client';
 import { notFound } from 'next/navigation';
@@ -20,16 +21,15 @@ interface BlogPost {
   publishedAt: string;
 }
 
-// The fetch function remains the same
-const fetchPostById = async (id: string) => {
+const fetchPostById = async (id: string): Promise<BlogPost | null> => {
   const post = await client.fetch(query, { id });
-  return post;
+  return post || null;
 };
 
-// For dynamic routes, ensure the component accepts params as expected
-export default async function BlogDetail({ params }: { params: { id: string } }) {
+// Correctly typing the component using NextPage with dynamic params
+const BlogDetail: NextPage<{ params: { id: string } }> = async ({ params }) => {
   const { id } = params; // Extracting 'id' from the params object
-  const post: BlogPost = await fetchPostById(id);
+  const post = await fetchPostById(id);
 
   if (!post) {
     notFound(); // Show 404 if the post is not found
@@ -88,4 +88,6 @@ export default async function BlogDetail({ params }: { params: { id: string } })
       </div>
     </>
   );
-}
+};
+
+export default BlogDetail;
