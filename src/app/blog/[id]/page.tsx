@@ -1,7 +1,8 @@
+'use client';
 
 import CommentSection from '@/app/components/comments';
 import { client } from '@/sanity/lib/client';
-
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -21,12 +22,21 @@ interface BlogPost {
   publishedAt: string;
 }
 
-const fetchPostById = async (id: string): Promise<BlogPost | null> => {
-  const post = await client.fetch(query, { id });
-  return post || null;
-};
+const BlogDetail = ({ params }: { params: { id: string } }) => {
+  const [post, setPost] = useState<BlogPost | null>(null);
 
-const BlogDetail = ({ post }: { post: BlogPost }) => {
+  useEffect(() => {
+    const fetchPost = async () => {
+      const data = await client.fetch(query, { id: params.id });
+      setPost(data || null);
+    };
+    fetchPost();
+  }, [params.id]);
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <div className="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-center">
@@ -87,23 +97,6 @@ const BlogDetail = ({ post }: { post: BlogPost }) => {
       </div>
     </div>
   );
-};
-
-export const getStaticProps = async (context: any) => {
-  const { params } = context;
-  const post = await fetchPostById(params.id);
-
-  if (!post) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      post,
-    },
-  };
 };
 
 export default BlogDetail;
